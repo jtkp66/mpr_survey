@@ -1,3 +1,72 @@
+input[type="radio"], input[type="checkbox"].largercheckbox {
+  margin-right: 0.5rem;
+}
+
+
+.form .form-group {
+  margin: 1.2rem 0;
+}
+
+.form .form-text {
+  display: block;
+  margin-top: 0.3rem;
+  color: #888;
+}
+
+.form input[type='text'],
+.form input[type='email'],
+.form input[type='password'],
+.form input[type='date'],
+.form select,
+.form textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+}
+
+.form input[type='submit'],
+button {
+  font: inherit;
+}
+
+.form .social-input {
+  display: flex;
+}
+
+.form .social-input i {
+  padding: 0.5rem;
+  width: 4rem;
+}
+
+.form .social-input i.fa-twitter {
+  color: #38a1f3;
+}
+.form .social-input i.fa-facebook {
+  color: #3b5998;
+}
+.form .social-input i.fa-instagram {
+  color: #3f729b;
+}
+.form .social-input i.fa-youtube {
+  color: #c4302b;
+}
+.form .social-input i.fa-linkedin {
+  color: #0077b5;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+}
+
+.table th {
+  background: var(--light-color);
+}
+
+
 .btn-secondary {
   color: #fff !important; }
 
@@ -31,7 +100,7 @@ img {
     left: 0;
     min-height: 400px;
     width: 100%;
-    background: rgba(51, 51, 51, 0.8); }
+    background: rgba(70, 25, 25, 0.8); }
 
 #services {
   background: url(../img/building.jpg) no-repeat top center fixed/cover;
@@ -45,10 +114,10 @@ img {
     left: 0;
     min-height: 100%;
     width: 100%;
-    background: rgba(32, 134, 107, 0.8); }
+    background: rgba(151, 26, 26, 0.8); }
 
 #showcase-inner {
-  background: url(../img/building.jpg) no-repeat top center fixed/cover;
+  background: url(../img/america.jpg) no-repeat top center fixed/cover;
   position: relative;
   overflow: hidden;
   min-height: 200px; }
@@ -59,11 +128,12 @@ img {
     left: 0;
     min-height: 100%;
     width: 100%;
-    background: rgba(32, 134, 107, 0.8); }
+    background: rgba(151, 26, 26, 0.8); }
   #showcase-inner.showcase-search {
     min-height: 270px; }
 
 #work {
+  background: url(../img/building.jpg) no-repeat top center fixed/cover;
   padding: 6rem 0; }
 
 .listing-preview a {

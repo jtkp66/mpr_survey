@@ -1,44 +1,37 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.utils import timezone
 from django.contrib.auth.models import User
+from .forms import PostForm
 from django.views.generic import (
-    ListView,
-    DetailView,
     CreateView,
+    DetailView,
     UpdateView,
-    DeleteView
 )
 from .models import Post
 
 
-def home(request):
+def index(request):
+    posts = Post.objects.order_by('date_posted').filter(is_complete=True)
+
     context = {
-        'posts': Post.objects.all()
+        'posts': posts
     }
-    return render(request, 'survey/home.html', context)
 
+    return render(request, 'survey/surveys.html', context)        
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'survey/home.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
-    ordering = ['date_posted']
-    paginate_by = 5
+def post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
 
-class UserPostListView(ListView):
-    model = Post
-    template_name = 'survey/user_posts.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
-    paginate_by = 5
+    context = {
+        'post': post
+    }
 
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+    return render(request, 'survey/survey2.html', context)
 
+def survey_new(request):
 
-class PostDetailView(DetailView):
-    model = Post
-
+    return render(request, 'survey/survey-new2.html')
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -48,33 +41,33 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('dashboard')
+    else:
+        form = PostForm()
+    return render(request, 'survey/survey-new2.html', {'form': form})
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+class PostDetailView(DetailView):
     model = Post
-    fields = ['coordinator', 'student', 'hostfamily', 'question1', 'question2', 'question3', 'is_complete' ]
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
-
-
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Post
-    success_url = '/'
-
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
-
-
-def about(request):
-    return render(request, 'survey/about.html', {'title': 'About'})
-    
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'post_edit.html', {'form': form})

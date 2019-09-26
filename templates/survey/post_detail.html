@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block title %} | Edit Survey{%endblock %} {% block content %}
+<section class="container">
+    <h1 class="large text-primary">
+        Student Monthly Progress Report
+    </h1>
+
+    <small>* = required field</small>
+    <form class="form" method="POST" action="{% url 'post_edit' pk=post.pk %}">
+            {% csrf_token %}
+        <div class="form-group">
+            <label>Coordinator Name</label>
+            <input type="text" placeholder="Coordinator Name" name="coordinator" value="{{ post.coordinator }}"/>
+        </div>
+        <div class="form-group">
+            <select name="status">
+                <option value="0">* Select Status</option>
+                <option value="Developer">Good</option>
+                <option value="Junior Developer">Better</option>
+                <option value="Senior Developer">Best</option>
+                <option value="Manager">Bad</option>
+            </select>
+            <small class="form-text">Give us an idea of where you are at in your career</small>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Student Name" name="student" value="{{ post.student }}"/>
+            <small class="form-text">English Name</small>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Host Family" name="hostfamily" value="{{ post.hostfamily }}" />
+            <small class="form-text">Please enter full name</small>
+        </div>
+        <div class="form-group">
+            <textarea placeholder="Question 1" name="question1" value="{{ post.question1 }}">{{ post.question1 }}</textarea>
+            <small class="form-text">Tell us a little about yourself</small>
+        </div>
+        <div class="form-group">
+            <label>Question 2</label>
+            <textarea placeholder="Question 2" name="question2">{{ post.question2 }}</textarea>
+        </div>
+        <div class="form-group">
+            <textarea placeholder="Question 3" name="question3">{{ post.question3 }}</textarea>
+            <small class="form-text">Tell us a little about yourself</small>
+        </div>
+        <div class="form-group">
+            {% if post.is_complete %}
+                <input type="checkbox" name="is_complete" value="{{ post.is_complete }}" checked><span class="text-danger">Survey is Complete</span></input>
+            {% else %}
+                <input type="checkbox" name="is_complete" />
+                <small class="form-text text-danger">Please check the box when survey is complete.</small>
+            {% endif %}
+        </div>
+        <input type="submit" value="submit" class="btn btn-primary my-1" />
+        <a class="btn btn-light my-1" href="{% url 'dashboard' %}">Go Back</a>
+    </form>
+</section>
+{% endblock %}
