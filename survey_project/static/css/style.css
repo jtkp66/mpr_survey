@@ -2,13 +2,43 @@ input[type="radio"], input[type="checkbox"].largercheckbox {
   margin-right: 0.5rem;
 }
 
+textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	width: 100%;
+}
 
 .form .form-group {
   margin: 1.2rem 0;
+  display: flex;
+  align-items: center;
+  align-self: center;
+
+}
+
+h2 {
+  border: 4px dotted blue;
+}
+
+#post-form {
+  align-self: stretch;
+  align-items: stretch;
+}
+
+#_st_1a {
+  align-self: stretch;
+  align-items: stretch;
+}
+
+#edit-form {
+  align-self: stretch;
+  align-items: stretch;
 }
 
 .form .form-text {
-  display: block;
+  display: flex;
   margin-top: 0.3rem;
   color: #888;
 }
@@ -19,11 +49,13 @@ input[type="radio"], input[type="checkbox"].largercheckbox {
 .form input[type='date'],
 .form select,
 .form textarea {
-  display: block;
-  width: 100%;
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+  width: 100%;
 }
 
 .form input[type='submit'],

@@ -55,7 +55,7 @@
             <tr>
               <td>{{ post.id }}</td>
               <td>{{ post.coordinator }}</td>
-              <td>{{ post.student }}</td>
+              <td>{{ post.student_surname }}</td>
               <td>{{ post.hostfamily }}</td>
               <td>{{ post.date_posted }}</td>
                 {% if post.is_complete %}
@@ -65,9 +65,9 @@
                 {% endif %} 
               <td>
                 {% if post.is_complete %}
-                  <a class="btn btn-light" href="{% url 'post_detail' post.id %}">View Survey</a>
+                  <a class="btn btn-light" href="{% url 'post_detail' post.id %}">Pending Approval</a>
                 {% else %}
-                  <a class="btn btn-danger" href="{% url 'post_detail' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span>Finish Survey</a>
+                  <a class="btn btn-danger" href="{% url 'update_task' post.id %}"><span class="glyphicon glyphicon-pencil"></span>Finish Survey</a>
               {% endif %}    
               </td>
             </tr>
@@ -76,7 +76,7 @@
         </table>
         {% else %}
         <p>You have no surveys. Click here to create one.</p>
-        <a class="btn btn-success" href="{% url 'survey-new2' %}">Create Survey</a>
+        <a class="btn btn-success" href="{% url 'survey-new' %}">Create Survey</a>
         {% endif %}
       </div>
     </div>

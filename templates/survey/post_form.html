@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <h2>New post</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+<section id="register" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4>Monthly Progress Report</h4>
+            </div>
+            <div class="card-body">
+              {% include 'partials/_alerts.html' %}
+              
+              
+                
+                    <form method="POST" class="post-form" id="post-form">{% csrf_token %}
+                        <div class="form-group">
+                            {{ form|crispy }}
+                        </div>
+                        <button type="submit" class="save btn btn-default">Save</button>
+                    </form>
+                
+                
+                
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
+

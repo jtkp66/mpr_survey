@@ -43,13 +43,13 @@
                Welcome, {{ user.username }} (Dashboard)</a>
             </li>
             <li
-            {% if 'survey-new2' in request.path %}
+            {% if 'survey-new' in request.path %}
               class="nav-item active mr-3"
             {% else %}
               class="nav-item mr-3"
             {% endif %}
             >
-              <a class="nav-link" href="{% url 'survey-new2' %}">
+              <a class="nav-link" href="{% url 'survey-new' %}">
                Create Survey</a>
             </li>
             <li class="nav-item mr-3">

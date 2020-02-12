@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'survey_project.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "homestaydb",
+        "NAME": "mprdev",
         "USER": "postgres",
         "PASSWORD": "123456",
         "HOST": "localhost",
-        "PORT": "5001",
+        "PORT": "5432",
     }
 }
 

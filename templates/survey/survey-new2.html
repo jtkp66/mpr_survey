@@ -8,7 +8,7 @@
     <form class="form" action="{% url 'survey-new2' %}" method="POST" >
         {% csrf_token %}
         <div class="form-group">
-            <label>* Coordinator Name</label>
+            <label>* Date(s) of Contact (Month/Day/Year:)</label>
             <input type="text" placeholder="* Coordinator Name" name="coordinator" />
         </div>
         <div class="form-group">
@@ -21,20 +21,24 @@
             <small class="form-text">Give us an idea of where you are at in your career</small>
         </div>
         <div class="form-group">
-            <input type="text" placeholder="* Student Name" name="student" />
-            <small class="form-text">English Name</small>
+            <small class="form-text">Student's Surname, Given Name</small>
+            <input type="text" placeholder="* Student Name" name="student_surname" /> 
+        </div>
+        <div class="form-group">
+            <small class="form-text">Student's English Name</small>
+            <input type="text" placeholder="* Student Name" name="student_eng_name" /> 
         </div>
         <div class="form-group">
             <input type="text" placeholder="* Host Family" name="hostfamily" />
             <small class="form-text">Please enter full name</small>
         </div>
         <div class="form-group">
-            <textarea placeholder="Question 1" name="question1"></textarea>
-            <small class="form-text">Tell us a little about yourself</small>
+            <input placeholder="Question 1" type="text" name="st_1" />
+            <small class="form-text">How are you getting along with your host family?</small>
         </div>
         <div class="form-group">
             <label>Question 2</label>
-            <textarea placeholder="Question 2" name="question1"></textarea>
+            <textarea placeholder="Question 2" name="st_1"></textarea>
         </div>
         <div class="form-group">
             <textarea placeholder="Question 3" name="question1"></textarea>

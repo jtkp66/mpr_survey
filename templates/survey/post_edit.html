@@ -1,52 +1,444 @@
-{% extends 'base.html' %} {% block title %} | Edit Survey{%endblock %} {% block content %}
-<section class="container">
-    <h1 class="large text-primary">
-        Student Monthly Progress Report
-    </h1>
+{% extends 'base.html' %}
 
-    <small>* = required field</small>
-    <form class="form" method="POST" action="{% url 'post_edit' pk=post.pk %}" >
-            {% csrf_token %}
-        <div class="form-group">
-            <label>Coordinator Name</label>
-            <input type="text" placeholder="Coordinator Name" name="coordinator" value="{{ post.coordinator }}"/>
+{% block title %} | Create Survey{%endblock %}
+
+{% block content %}
+<section id="register" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Monthly Progress Report</h4>
+          </div>
+          <div class="card-body">
+            {% include 'partials/_alerts.html' %}
+            <form action="" method="POST">
+              {% csrf_token %}
+              <h2>Student Progress</h2>
+              <div class="form-group">
+                <label for="coordinator">Date(s) of Contact(Month/Day/Year):</label>
+                <input
+                  type="date"
+                  name="date_of_contact"
+                  class="form-control"
+                  value="{{ post.date_of_contact }}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="student">Student's Surname, Given Name</label>
+                <input
+                  type="text"
+                  name="student_surname"
+                  class="form-control"
+                  value="{{ post.student_surname }}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="coordinator">Coordinator Name</label>
+                <input
+                  type="text"
+                  name="coordinator"
+                  class="form-control"
+                  value="{{ post.coordinator }}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="hostfamily">Host Family Name</label>
+                <input
+                  type="text"
+                  name="hostfamily"
+                  class="form-control"
+                  value="{{ post.hostfamily }}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="student_eng_name">Student's English Name</label>
+                <input
+                  type="text"
+                  name="student_eng_name"
+                  class="form-control"
+                  value="{{ post.student_eng_name }}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <select name="st_1" value="{{ post.st_1 }}">
+                    <option value="{{ post.st_1 }}">* How are you getting along with your host family?</option>
+                    <option value="excellent">Excellent</option>
+                    <option value="very good">Very Good</option>
+                    <option value="satisfactory">Satisfactory</option>
+                    <option value="needs improvement">Needs Improvement</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">Comments:
+                </small>
+                <textarea name="st_1a" value="{{ post.st_1a }}">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <label for="st_2">Please Tell me about an experience you had this month at school that differs from last month (REQUIRED).</label>
+                <input
+                  type="text"
+                  name="st_2"
+                  value="{{ post.st_2 }}"
+                  class="form-control" 
+                />
+              </div>
+              <div class="form-group">
+                <label for="st_3">Please Tell me about an experience you had this month with your host family that differs from last month (REQUIRED).</label>
+                <input
+                  type="text"
+                  name="st_3"
+                  value="{{ post.st_3 }}"
+                  class="form-control"  
+                />
+              </div>
+              <div class="form-group">
+                <label>Do you feel you are improving your conversational English:</label>
+                <label class="radio-inline ml-2 mr-2">Yes<input class="ml-2" type="radio" name="st_4" value="Yes"></label>
+                <label class="radio-inline mr-2">No<input class="ml-2" type="radio" name="st_4" value="No"></label>
+              </div>
+              <div class="form-group">
+                <select name="st_4">
+                    <option value="0">* Do you feel you are improving your conversational english?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">If yes, provide examples of how you have improved your conversational level of English:
+                </small>
+                <textarea name="st_4a" value="{{ post.st_4a }}">
+                    {{ post.st_4a }}
+                </textarea>
+              </div>
+              <div class="form-group">
+                <small class="form-text">If no, provide examples of areas you would like to improve upon to help strengthen your level of English:
+                </small>
+                <textarea name="st_4b">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="st_5">
+                    <option value="0">* Have you made new American friends & interests in the community or school?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">If yes, provide details:
+                </small>
+                <textarea name="st_5a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="st_6">
+                    <option name="st_6" value="0">* How do you feel you are doing in school?</option>
+                    <option name="st_6" value="excellent">Excellent</option>
+                    <option name="st_6" value="very good">Very Good</option>
+                    <option name="st_6" value="satisfactory">Satisfactory</option>
+                    <option name="st_6" value="needs improvement">Needs Improvement</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <label for="coordinator">What is your favorite subject this month?</label>
+                <input
+                  type="text"
+                  name="st_6a"
+                  class="form-control"
+                  
+                />
+              </div>
+              <div class="form-group">
+                <label for="coordinator">What subject are you having trouble with this month?</label>
+                <input
+                  type="text"
+                  name="st_6b"
+                  class="form-control"
+                  
+                />
+              </div>
+              <div class="form-group">
+                <select name="st_7">
+                    <option value="0">* Did you experience any issues this month with your host family or at School?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <select name="st_7a">
+                    <option value="0">Is there anything you would like to talk about or need help with?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">Student's Comments:
+                </small>
+                <textarea name="st_7b">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <small class="form-text">Coordinator's comments re: Student's progress this month (REQUIRED):
+                </small>
+                <textarea name="st_coordinator_comments">
+                </textarea>
+              </div>
+
+              <hr />
+
+              <h2>Host Family Report</h2>
+              <div class="form-group">
+                <label for="student">HOST'S FAMILY NAME:</label>
+                <input
+                  type="text"
+                  name="hf_hostfamily_name"
+                  class="form-control"
+                  
+                />
+              </div>
+              <div class="form-group">
+                <select name="hf_1">
+                    <option value="0">How is your relationship with your student?</option>
+                    <option value="Developer">Excellent</option>
+                    <option value="Junior Developer">Very Good</option>
+                    <option value="Manager">Satisfactory</option>
+                    <option value="Manager">Needs Improvement</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">Comments:
+                </small>
+                <textarea name="hf_1a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <label for="hf_2">Please Tell me about an experience you had this month with your student that differs from last month (REQUIRED).</label>
+                <input
+                  type="text"
+                  name="hf_2"
+                  class="form-control"
+                  
+                />
+              </div>
+              <div class="form-group">
+                <select name="hf_3">
+                  <option value="0">* Do you feel your student is improving his/her level of conversational english?</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">If yes, provide examples of how your student has improved in this area:
+                </small>
+                <textarea name="hf_3a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <small class="form-text">If no, provide examples of specific areas you feel your student can improve upon to help strengthen his/her level of English:
+                </small>
+                <textarea name="st_3b">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="hf_4">
+                    <option value="0">Has your student interacted with your family this month?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">If yes, provide examples of how your student interacted with your family this month:
+                </small>
+                <textarea name="hf_4a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <small class="form-text">If no, provide examples of how your student can better interact with your family:
+                </small>
+                <textarea name="st_4b">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="hf_5">
+                    <option value="0">Has your student made plans with any American friends or shown any interest in events in the community?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">If yes, provide details:
+                </small>
+                <textarea name="hf_5a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="hf_6">
+                    <option value="0">Does your student obey the rules at home this month?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">If no, please provide details so MAH can counsel the student to better improve in this area:
+                </small>
+                <textarea name="hf_6a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="hf_7">
+                    <option value="0">Rate your hosting experience so far:</option>
+                    <option value="Developer">Excellent</option>
+                    <option value="Junior Developer">Very Good</option>
+                    <option value="Manager">Satisfactory</option>
+                    <option value="Manager">Needs Improvement</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">Host Family's Comments:
+                </small>
+                <textarea name="hf_7a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <small class="form-text">Coordinator's comments re: Host Family progress this month (REQUIRED):
+                </small>
+                <textarea name="hf_coordinator_comments">
+                </textarea>
+              </div>
+
+              <hr />
+
+              <h2>School Progress</h2>
+              <div class="form-group">
+                <label for="sch_school_name">School's Name</label>
+                <input
+                  type="text"
+                  name="sch_school_name"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="student">Student's Name</label>
+                <input
+                  type="text"
+                  name="sch_student_name"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <label for="student">List the name and title of the contact person you spoke with at the school:</label>
+                <input
+                  type="text"
+                  name="sch_1a"
+                  class="form-control"
+                  placeholder="Contact Name"
+                />
+                <input
+                  type="text"
+                  name="sch_1b"
+                  class="form-control mt-2"
+                  placeholder="Contact Title"
+                />
+              </div>
+              <div class="form-group">
+                <select name="sch_2">
+                    <option value="0">What is the school's impression of the student's academic performance this month?</option>
+                    <option value="Developer">Excellent</option>
+                    <option value="Junior Developer">Very Good</option>
+                    <option value="Manager">Satisfactory</option>
+                    <option value="Manager">Needs Improvement</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <small class="form-text">School's feedback about student's academic performance this month:
+                </small>
+                <textarea name="sch_2a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="sch_3">
+                    <option value="0">Has the student had any accomplishments (e.g., honor roll, athletics, club participation)?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">Please list details re: accomplishments:
+                </small>
+                <textarea name="sch_3a">
+                </textarea>
+              </div>
+              <div class="form-group">
+                <select name="sch_4">
+                  <option value="0">Has the student missed any days from school</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+                <select name="sch_4b">
+                  <option value="0">Were these excused absences?</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+                <input
+                  type="number"
+                  name="sch_4a"
+                  class="form-control"
+                  placeholder="# of Days Missed"
+                /> 
+              </div>
+              <div class="form-group"></div>
+                <label for="sch_4c">School's Comments re: student's attendance:</label>
+                <input
+                  type="text"
+                  name="sch_4c"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <select name="sch_5">
+                    <option value="0">Does the student need additional help at school, such as tutoring, or is there any area(s) MAH can counsel the student to help him/her improve in this area?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group"></div>
+                <label for="sch_5a">School's Comments re:</label>
+                <input
+                  type="text"
+                  name="sch_5a"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group">
+                <select name="sch_6">
+                    <option value="0">Is the student receiving a "C" or better in each class?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>  
+              </div>
+              <div class="form-group">
+                <small class="form-text">List all classes & current grades this month below.
+                </small>
+                <textarea name="sch_classes_grades">
+                </textarea>
+              </div>
+              <div class="form-group ml-6">
+                <input class="ml-6" type="checkbox" name="is_complete" value="{{ post.is_complete }}" />
+                <small for="is_complete">Please check to Complete the Report before submitting</small>
+              </div>
+              <input type="submit" class="btn btn-danger btn-block" /> 
+            </form>
+          </div>
         </div>
-        <div class="form-group">
-            <select name="status">
-                <option value="0">* Select Status</option>
-                <option value="Developer">Good</option>
-                <option value="Junior Developer">Better</option>
-                <option value="Senior Developer">Best</option>
-                <option value="Manager">Bad</option>
-            </select>
-            <small class="form-text">Give us an idea of where you are at in your career</small>
-        </div>
-        <div class="form-group">
-            <input type="text" placeholder="Student Name" name="student" value="{{ post.student }}"/>
-            <small class="form-text">English Name</small>
-        </div>
-        <div class="form-group">
-            <input type="text" placeholder="Host Family" name="hostfamily" value="{{ post.hostfamily }}" />
-            <small class="form-text">Please enter full name</small>
-        </div>
-        <div class="form-group">
-            <textarea placeholder="Question 1" name="question1" value="{{ post.question1 }}">{{ post.question1 }}</textarea>
-            <small class="form-text">Tell us a little about yourself</small>
-        </div>
-        <div class="form-group">
-            <label>Question 2</label>
-            <textarea placeholder="Question 2" name="question2">{{ post.question2 }}</textarea>
-        </div>
-        <div class="form-group">
-            <textarea placeholder="Question 3" name="question3">{{ post.question3 }}</textarea>
-            <small class="form-text">Tell us a little about yourself</small>
-        </div>
-        <div class="form-group">
-            <input type="checkbox" name="is_complete" value="{{ post.is_complete }}">{{ post.is_complete }}</input>
-            <small class="form-text">Please check the box when survey is complete.</small>
-        </div>
-        <input type="submit" value="submit" class="btn btn-primary my-1" />
-        <a class="btn btn-light my-1" href="dashboard.html">Go Back</a>
-    </form>
+      </div>
+    </div>
+  </div>
 </section>
 {% endblock %}
